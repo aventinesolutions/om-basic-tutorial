@@ -8,11 +8,13 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
-(defonce app-state (atom {:text "Hello world!"}))
+(defonce app-state (atom {:list ["Lion" "Zebra" "Buffalo" "Antelope"]}))
 
 (om/root
  (fn [data owner]
-   (om/component (dom/h2 nil (:test data))))
+   (om/component
+    (apply dom/ul #js {:className "menagerie"}
+           (map (fn [text] (dom/li #js {:className "animals"} text)) (:list data)))))
  app-state
  {:target (. js/document (getElementById "appUm"))})
 
