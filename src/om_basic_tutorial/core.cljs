@@ -11,14 +11,16 @@
 (defonce app-state (atom {:text "Hello world!"}))
 
 (om/root
-  (fn [data owner]
-    (reify om/IRender
-      (render [_]
-        (dom/div nil
-                 (dom/h1 nil (:text data))
-                 (dom/h3 nil "Edit this and watch it change!")))))
-  app-state
-  {:target (. js/document (getElementById "app"))})
+ (fn [data owner]
+   (om/component (dom/h2 nil (:test data))))
+ app-state
+ {:target (. js/document (getElementById "appUm"))})
+
+(om/root
+ (fn [data owner]
+   (om/component (dom/h2 nil (:test data))))
+ app-state
+ {:target (. js/document (getElementById "appDois"))})
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on
